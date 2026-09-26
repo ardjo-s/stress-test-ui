@@ -121,11 +121,12 @@ export default function App() {
           <div className="space-y-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <ModeToggle mode={mode} onChange={setMode} />
-              <div className="flex items-center gap-2">
+              <div className="flex items-center rounded-full border border-line bg-paper p-1">
                 {(Object.keys(INTENSITY_COPY) as Intensity[]).map((value) => (
                   <button
                     key={value}
                     type="button"
+                    title={INTENSITY_COPY[value].detail}
                     onClick={() => {
                       setIntensity(value);
                       setMode("worst");

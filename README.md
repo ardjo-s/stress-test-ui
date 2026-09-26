@@ -39,7 +39,7 @@ npm run lint
 
 ## Deploy to Cloudflare Pages
 
-This is a static Vite SPA. After `npm run build`, `dist/` is the upload directory.
+This is a static Vite SPA (single route: `/`). After `npm run build`, `dist/` is the upload directory. SPA fallback is set in `wrangler.jsonc` via `assets.not_found_handling = "single-page-application"` — do not add a Pages `_redirects` `/* → /index.html` rule if you also deploy with `wrangler deploy`, or Workers will reject the upload as a redirect loop.
 
 ### Option A — Wrangler (direct upload)
 
@@ -86,6 +86,8 @@ Unauthenticated agent preview (lives ~60 minutes, prints a claim URL):
 npm run build
 npx wrangler deploy --temporary
 ```
+
+That publishes Workers static assets (same `dist/` folder) to a `*.workers.dev` URL. It is the path this repo used when no `CLOUDFLARE_API_TOKEN` was available. Open the printed **Claim URL** within 60 minutes to attach the preview to a real Cloudflare account. After that, create a Pages project (Option A or C) for a durable `*.pages.dev` hostname.
 
 ### Option C — GitHub connected to Pages
 
